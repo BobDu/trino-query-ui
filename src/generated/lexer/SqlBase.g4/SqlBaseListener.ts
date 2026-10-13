@@ -8,6 +8,7 @@ import { StandaloneExpressionContext } from "./SqlBaseParser.js";
 import { StandalonePathSpecificationContext } from "./SqlBaseParser.js";
 import { StandaloneTypeContext } from "./SqlBaseParser.js";
 import { StandaloneRowPatternContext } from "./SqlBaseParser.js";
+import { StandaloneFunctionSpecificationContext } from "./SqlBaseParser.js";
 import { StatementDefaultContext } from "./SqlBaseParser.js";
 import { UseContext } from "./SqlBaseParser.js";
 import { CreateCatalogContext } from "./SqlBaseParser.js";
@@ -15,7 +16,6 @@ import { DropCatalogContext } from "./SqlBaseParser.js";
 import { CreateSchemaContext } from "./SqlBaseParser.js";
 import { DropSchemaContext } from "./SqlBaseParser.js";
 import { RenameSchemaContext } from "./SqlBaseParser.js";
-import { SetSchemaAuthorizationContext } from "./SqlBaseParser.js";
 import { CreateTableAsSelectContext } from "./SqlBaseParser.js";
 import { CreateTableContext } from "./SqlBaseParser.js";
 import { DropTableContext } from "./SqlBaseParser.js";
@@ -29,10 +29,13 @@ import { RenameTableContext } from "./SqlBaseParser.js";
 import { AddColumnContext } from "./SqlBaseParser.js";
 import { RenameColumnContext } from "./SqlBaseParser.js";
 import { DropColumnContext } from "./SqlBaseParser.js";
+import { SetDefaultValueContext } from "./SqlBaseParser.js";
+import { DropDefaultValueContext } from "./SqlBaseParser.js";
 import { SetColumnTypeContext } from "./SqlBaseParser.js";
-import { SetTableAuthorizationContext } from "./SqlBaseParser.js";
+import { DropNotNullConstraintContext } from "./SqlBaseParser.js";
 import { SetTablePropertiesContext } from "./SqlBaseParser.js";
 import { TableExecuteContext } from "./SqlBaseParser.js";
+import { SetAuthorizationContext } from "./SqlBaseParser.js";
 import { AnalyzeContext } from "./SqlBaseParser.js";
 import { CreateMaterializedViewContext } from "./SqlBaseParser.js";
 import { CreateViewContext } from "./SqlBaseParser.js";
@@ -42,16 +45,22 @@ import { RenameMaterializedViewContext } from "./SqlBaseParser.js";
 import { SetMaterializedViewPropertiesContext } from "./SqlBaseParser.js";
 import { DropViewContext } from "./SqlBaseParser.js";
 import { RenameViewContext } from "./SqlBaseParser.js";
-import { SetViewAuthorizationContext } from "./SqlBaseParser.js";
+import { RefreshViewContext } from "./SqlBaseParser.js";
 import { CallContext } from "./SqlBaseParser.js";
+import { CreateFunctionContext } from "./SqlBaseParser.js";
+import { DropFunctionContext } from "./SqlBaseParser.js";
+import { CreateBranchContext } from "./SqlBaseParser.js";
+import { DropBranchContext } from "./SqlBaseParser.js";
+import { FastForwardBranchContext } from "./SqlBaseParser.js";
+import { ShowBranchesContext } from "./SqlBaseParser.js";
 import { CreateRoleContext } from "./SqlBaseParser.js";
 import { DropRoleContext } from "./SqlBaseParser.js";
 import { GrantRolesContext } from "./SqlBaseParser.js";
+import { GrantPrivilegesContext } from "./SqlBaseParser.js";
 import { RevokeRolesContext } from "./SqlBaseParser.js";
-import { SetRoleContext } from "./SqlBaseParser.js";
-import { GrantContext } from "./SqlBaseParser.js";
+import { RevokePrivilegesContext } from "./SqlBaseParser.js";
 import { DenyContext } from "./SqlBaseParser.js";
-import { RevokeContext } from "./SqlBaseParser.js";
+import { SetRoleContext } from "./SqlBaseParser.js";
 import { ShowGrantsContext } from "./SqlBaseParser.js";
 import { ExplainContext } from "./SqlBaseParser.js";
 import { ExplainAnalyzeContext } from "./SqlBaseParser.js";
@@ -59,6 +68,7 @@ import { ShowCreateTableContext } from "./SqlBaseParser.js";
 import { ShowCreateSchemaContext } from "./SqlBaseParser.js";
 import { ShowCreateViewContext } from "./SqlBaseParser.js";
 import { ShowCreateMaterializedViewContext } from "./SqlBaseParser.js";
+import { ShowCreateFunctionContext } from "./SqlBaseParser.js";
 import { ShowTablesContext } from "./SqlBaseParser.js";
 import { ShowSchemasContext } from "./SqlBaseParser.js";
 import { ShowCatalogsContext } from "./SqlBaseParser.js";
@@ -82,10 +92,14 @@ import { ExecuteContext } from "./SqlBaseParser.js";
 import { ExecuteImmediateContext } from "./SqlBaseParser.js";
 import { DescribeInputContext } from "./SqlBaseParser.js";
 import { DescribeOutputContext } from "./SqlBaseParser.js";
+import { DescribeQueryOutputContext } from "./SqlBaseParser.js";
 import { SetPathContext } from "./SqlBaseParser.js";
 import { SetTimeZoneContext } from "./SqlBaseParser.js";
 import { UpdateContext } from "./SqlBaseParser.js";
 import { MergeContext } from "./SqlBaseParser.js";
+import { RootQueryContext } from "./SqlBaseParser.js";
+import { RootQueryWithSessionContext } from "./SqlBaseParser.js";
+import { SessionPropertyContext } from "./SqlBaseParser.js";
 import { QueryContext } from "./SqlBaseParser.js";
 import { WithContext } from "./SqlBaseParser.js";
 import { TableElementContext } from "./SqlBaseParser.js";
@@ -97,6 +111,7 @@ import { PropertyContext } from "./SqlBaseParser.js";
 import { DefaultPropertyValueContext } from "./SqlBaseParser.js";
 import { NonDefaultPropertyValueContext } from "./SqlBaseParser.js";
 import { QueryNoWithContext } from "./SqlBaseParser.js";
+import { OrderByContext } from "./SqlBaseParser.js";
 import { LimitRowCountContext } from "./SqlBaseParser.js";
 import { RowCountContext } from "./SqlBaseParser.js";
 import { QueryTermDefaultContext } from "./SqlBaseParser.js";
@@ -105,10 +120,12 @@ import { QueryPrimaryDefaultContext } from "./SqlBaseParser.js";
 import { TableContext } from "./SqlBaseParser.js";
 import { InlineTableContext } from "./SqlBaseParser.js";
 import { SubqueryContext } from "./SqlBaseParser.js";
+import { CorrespondingContext } from "./SqlBaseParser.js";
 import { SortItemContext } from "./SqlBaseParser.js";
 import { QuerySpecificationContext } from "./SqlBaseParser.js";
 import { GroupByContext } from "./SqlBaseParser.js";
 import { SingleGroupingSetContext } from "./SqlBaseParser.js";
+import { AutoContext } from "./SqlBaseParser.js";
 import { RollupContext } from "./SqlBaseParser.js";
 import { CubeContext } from "./SqlBaseParser.js";
 import { MultipleGroupingSetsContext } from "./SqlBaseParser.js";
@@ -124,6 +141,10 @@ import { JoinRelationContext } from "./SqlBaseParser.js";
 import { JoinTypeContext } from "./SqlBaseParser.js";
 import { JoinCriteriaContext } from "./SqlBaseParser.js";
 import { SampledRelationContext } from "./SqlBaseParser.js";
+import { PivotContext } from "./SqlBaseParser.js";
+import { PivotAggregationContext } from "./SqlBaseParser.js";
+import { PivotColumnsContext } from "./SqlBaseParser.js";
+import { PivotValueGroupContext } from "./SqlBaseParser.js";
 import { SampleTypeContext } from "./SqlBaseParser.js";
 import { TrimsSpecificationContext } from "./SqlBaseParser.js";
 import { ListAggOverflowBehaviorContext } from "./SqlBaseParser.js";
@@ -144,6 +165,7 @@ import { LateralContext } from "./SqlBaseParser.js";
 import { TableFunctionInvocationContext } from "./SqlBaseParser.js";
 import { ParenthesizedRelationContext } from "./SqlBaseParser.js";
 import { JsonTableContext } from "./SqlBaseParser.js";
+import { NearestContext } from "./SqlBaseParser.js";
 import { OrdinalityColumnContext } from "./SqlBaseParser.js";
 import { ValueColumnContext } from "./SqlBaseParser.js";
 import { QueryColumnContext } from "./SqlBaseParser.js";
@@ -175,16 +197,21 @@ import { InListContext } from "./SqlBaseParser.js";
 import { InSubqueryContext } from "./SqlBaseParser.js";
 import { LikeContext } from "./SqlBaseParser.js";
 import { NullPredicateContext } from "./SqlBaseParser.js";
+import { BooleanTestContext } from "./SqlBaseParser.js";
 import { DistinctFromContext } from "./SqlBaseParser.js";
+import { MatchContext } from "./SqlBaseParser.js";
+import { OverlapsContext } from "./SqlBaseParser.js";
 import { ValueExpressionDefaultContext } from "./SqlBaseParser.js";
 import { ConcatenationContext } from "./SqlBaseParser.js";
+import { AtLocalContext } from "./SqlBaseParser.js";
 import { ArithmeticBinaryContext } from "./SqlBaseParser.js";
 import { ArithmeticUnaryContext } from "./SqlBaseParser.js";
 import { AtTimeZoneContext } from "./SqlBaseParser.js";
 import { DereferenceContext } from "./SqlBaseParser.js";
-import { TypeConstructorContext } from "./SqlBaseParser.js";
 import { JsonValueContext } from "./SqlBaseParser.js";
-import { SpecialDateTimeFunctionContext } from "./SqlBaseParser.js";
+import { LiteralsContext } from "./SqlBaseParser.js";
+import { CurrentDateContext } from "./SqlBaseParser.js";
+import { StringLiteralDereferenceContext } from "./SqlBaseParser.js";
 import { SubstringContext } from "./SqlBaseParser.js";
 import { CastContext } from "./SqlBaseParser.js";
 import { LambdaContext } from "./SqlBaseParser.js";
@@ -192,34 +219,45 @@ import { ParenthesizedExpressionContext } from "./SqlBaseParser.js";
 import { TrimContext } from "./SqlBaseParser.js";
 import { ParameterContext } from "./SqlBaseParser.js";
 import { NormalizeContext } from "./SqlBaseParser.js";
+import { LocalTimestampContext } from "./SqlBaseParser.js";
 import { JsonObjectContext } from "./SqlBaseParser.js";
-import { IntervalLiteralContext } from "./SqlBaseParser.js";
-import { NumericLiteralContext } from "./SqlBaseParser.js";
-import { BooleanLiteralContext } from "./SqlBaseParser.js";
 import { JsonArrayContext } from "./SqlBaseParser.js";
 import { SimpleCaseContext } from "./SqlBaseParser.js";
 import { ColumnReferenceContext } from "./SqlBaseParser.js";
-import { NullLiteralContext } from "./SqlBaseParser.js";
 import { RowConstructorContext } from "./SqlBaseParser.js";
+import { OverlayContext } from "./SqlBaseParser.js";
 import { SubscriptContext } from "./SqlBaseParser.js";
 import { JsonExistsContext } from "./SqlBaseParser.js";
 import { CurrentPathContext } from "./SqlBaseParser.js";
 import { SubqueryExpressionContext } from "./SqlBaseParser.js";
-import { BinaryLiteralContext } from "./SqlBaseParser.js";
+import { CurrentTimeContext } from "./SqlBaseParser.js";
+import { LocalTimeContext } from "./SqlBaseParser.js";
 import { CurrentUserContext } from "./SqlBaseParser.js";
 import { JsonQueryContext } from "./SqlBaseParser.js";
 import { MeasureContext } from "./SqlBaseParser.js";
 import { ExtractContext } from "./SqlBaseParser.js";
-import { StringLiteralContext } from "./SqlBaseParser.js";
+import { StaticMethodCallContext } from "./SqlBaseParser.js";
 import { ArrayConstructorContext } from "./SqlBaseParser.js";
 import { FunctionCallContext } from "./SqlBaseParser.js";
+import { UniqueContext } from "./SqlBaseParser.js";
+import { CurrentTimestampContext } from "./SqlBaseParser.js";
 import { CurrentSchemaContext } from "./SqlBaseParser.js";
 import { ExistsContext } from "./SqlBaseParser.js";
 import { PositionContext } from "./SqlBaseParser.js";
 import { ListaggContext } from "./SqlBaseParser.js";
 import { SearchedCaseContext } from "./SqlBaseParser.js";
 import { CurrentCatalogContext } from "./SqlBaseParser.js";
+import { ArrayWildcardSubscriptContext } from "./SqlBaseParser.js";
 import { GroupingOperationContext } from "./SqlBaseParser.js";
+import { MethodCallContext } from "./SqlBaseParser.js";
+import { IntervalLiteralContext } from "./SqlBaseParser.js";
+import { TypeConstructorContext } from "./SqlBaseParser.js";
+import { NumericLiteralContext } from "./SqlBaseParser.js";
+import { BooleanLiteralContext } from "./SqlBaseParser.js";
+import { StringLiteralContext } from "./SqlBaseParser.js";
+import { BinaryLiteralContext } from "./SqlBaseParser.js";
+import { NullLiteralContext } from "./SqlBaseParser.js";
+import { FieldConstructorContext } from "./SqlBaseParser.js";
 import { JsonPathInvocationContext } from "./SqlBaseParser.js";
 import { JsonValueExpressionContext } from "./SqlBaseParser.js";
 import { JsonRepresentationContext } from "./SqlBaseParser.js";
@@ -239,7 +277,6 @@ import { ComparisonOperatorContext } from "./SqlBaseParser.js";
 import { ComparisonQuantifierContext } from "./SqlBaseParser.js";
 import { BooleanValueContext } from "./SqlBaseParser.js";
 import { IntervalContext } from "./SqlBaseParser.js";
-import { IntervalFieldContext } from "./SqlBaseParser.js";
 import { NormalFormContext } from "./SqlBaseParser.js";
 import { RowTypeContext } from "./SqlBaseParser.js";
 import { IntervalTypeContext } from "./SqlBaseParser.js";
@@ -249,9 +286,15 @@ import { LegacyArrayTypeContext } from "./SqlBaseParser.js";
 import { GenericTypeContext } from "./SqlBaseParser.js";
 import { DateTimeTypeContext } from "./SqlBaseParser.js";
 import { LegacyMapTypeContext } from "./SqlBaseParser.js";
+import { CompositeYearToMonthIntervalContext } from "./SqlBaseParser.js";
+import { SimpleYearMonthIntervalContext } from "./SqlBaseParser.js";
+import { CompositeDayTimeIntervalContext } from "./SqlBaseParser.js";
+import { SimpleDayTimeIntervalContext } from "./SqlBaseParser.js";
+import { SecondsDayTimeIntervalContext } from "./SqlBaseParser.js";
 import { RowFieldContext } from "./SqlBaseParser.js";
 import { TypeParameterContext } from "./SqlBaseParser.js";
-import { WhenClauseContext } from "./SqlBaseParser.js";
+import { SimpleWhenClauseContext } from "./SqlBaseParser.js";
+import { SearchedWhenClauseContext } from "./SqlBaseParser.js";
 import { FilterContext } from "./SqlBaseParser.js";
 import { MergeUpdateContext } from "./SqlBaseParser.js";
 import { MergeDeleteContext } from "./SqlBaseParser.js";
@@ -290,7 +333,38 @@ import { NamedArgumentContext } from "./SqlBaseParser.js";
 import { QualifiedArgumentContext } from "./SqlBaseParser.js";
 import { UnqualifiedArgumentContext } from "./SqlBaseParser.js";
 import { PathSpecificationContext } from "./SqlBaseParser.js";
+import { FunctionSpecificationContext } from "./SqlBaseParser.js";
+import { FunctionDefinitionContext } from "./SqlBaseParser.js";
+import { FunctionDeclarationContext } from "./SqlBaseParser.js";
+import { ParameterDeclarationContext } from "./SqlBaseParser.js";
+import { ReturnsClauseContext } from "./SqlBaseParser.js";
+import { LanguageCharacteristicContext } from "./SqlBaseParser.js";
+import { DeterministicCharacteristicContext } from "./SqlBaseParser.js";
+import { ReturnsNullOnNullInputCharacteristicContext } from "./SqlBaseParser.js";
+import { CalledOnNullInputCharacteristicContext } from "./SqlBaseParser.js";
+import { SecurityCharacteristicContext } from "./SqlBaseParser.js";
+import { CommentCharacteristicContext } from "./SqlBaseParser.js";
+import { PropertiesCharacteristicContext } from "./SqlBaseParser.js";
+import { ReturnStatementContext } from "./SqlBaseParser.js";
+import { AssignmentStatementContext } from "./SqlBaseParser.js";
+import { SimpleCaseStatementContext } from "./SqlBaseParser.js";
+import { SearchedCaseStatementContext } from "./SqlBaseParser.js";
+import { IfStatementContext } from "./SqlBaseParser.js";
+import { IterateStatementContext } from "./SqlBaseParser.js";
+import { LeaveStatementContext } from "./SqlBaseParser.js";
+import { CompoundStatementContext } from "./SqlBaseParser.js";
+import { LoopStatementContext } from "./SqlBaseParser.js";
+import { WhileStatementContext } from "./SqlBaseParser.js";
+import { RepeatStatementContext } from "./SqlBaseParser.js";
+import { CaseStatementWhenClauseContext } from "./SqlBaseParser.js";
+import { ElseIfClauseContext } from "./SqlBaseParser.js";
+import { ElseClauseContext } from "./SqlBaseParser.js";
+import { VariableDeclarationContext } from "./SqlBaseParser.js";
+import { SqlStatementListContext } from "./SqlBaseParser.js";
 import { PrivilegeContext } from "./SqlBaseParser.js";
+import { EntityKindContext } from "./SqlBaseParser.js";
+import { GrantObjectContext } from "./SqlBaseParser.js";
+import { OwnedEntityKindContext } from "./SqlBaseParser.js";
 import { QualifiedNameContext } from "./SqlBaseParser.js";
 import { QueryPeriodContext } from "./SqlBaseParser.js";
 import { RangeTypeContext } from "./SqlBaseParser.js";
@@ -300,11 +374,12 @@ import { CurrentRoleGrantorContext } from "./SqlBaseParser.js";
 import { UnspecifiedPrincipalContext } from "./SqlBaseParser.js";
 import { UserPrincipalContext } from "./SqlBaseParser.js";
 import { RolePrincipalContext } from "./SqlBaseParser.js";
-import { RolesContext } from "./SqlBaseParser.js";
+import { PrivilegeOrRoleContext } from "./SqlBaseParser.js";
 import { UnquotedIdentifierContext } from "./SqlBaseParser.js";
 import { QuotedIdentifierContext } from "./SqlBaseParser.js";
 import { BackQuotedIdentifierContext } from "./SqlBaseParser.js";
 import { DigitIdentifierContext } from "./SqlBaseParser.js";
+import { MethodNameContext } from "./SqlBaseParser.js";
 import { DecimalLiteralContext } from "./SqlBaseParser.js";
 import { DoubleLiteralContext } from "./SqlBaseParser.js";
 import { IntegerLiteralContext } from "./SqlBaseParser.js";
@@ -368,6 +443,16 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitStandaloneRowPattern?: (ctx: StandaloneRowPatternContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.standaloneFunctionSpecification`.
+     * @param ctx the parse tree
+     */
+    enterStandaloneFunctionSpecification?: (ctx: StandaloneFunctionSpecificationContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.standaloneFunctionSpecification`.
+     * @param ctx the parse tree
+     */
+    exitStandaloneFunctionSpecification?: (ctx: StandaloneFunctionSpecificationContext) => void;
     /**
      * Enter a parse tree produced by the `statementDefault`
      * labeled alternative in `SqlBaseParser.statement`.
@@ -452,18 +537,6 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitRenameSchema?: (ctx: RenameSchemaContext) => void;
-    /**
-     * Enter a parse tree produced by the `setSchemaAuthorization`
-     * labeled alternative in `SqlBaseParser.statement`.
-     * @param ctx the parse tree
-     */
-    enterSetSchemaAuthorization?: (ctx: SetSchemaAuthorizationContext) => void;
-    /**
-     * Exit a parse tree produced by the `setSchemaAuthorization`
-     * labeled alternative in `SqlBaseParser.statement`.
-     * @param ctx the parse tree
-     */
-    exitSetSchemaAuthorization?: (ctx: SetSchemaAuthorizationContext) => void;
     /**
      * Enter a parse tree produced by the `createTableAsSelect`
      * labeled alternative in `SqlBaseParser.statement`.
@@ -621,6 +694,30 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitDropColumn?: (ctx: DropColumnContext) => void;
     /**
+     * Enter a parse tree produced by the `setDefaultValue`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterSetDefaultValue?: (ctx: SetDefaultValueContext) => void;
+    /**
+     * Exit a parse tree produced by the `setDefaultValue`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitSetDefaultValue?: (ctx: SetDefaultValueContext) => void;
+    /**
+     * Enter a parse tree produced by the `dropDefaultValue`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterDropDefaultValue?: (ctx: DropDefaultValueContext) => void;
+    /**
+     * Exit a parse tree produced by the `dropDefaultValue`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitDropDefaultValue?: (ctx: DropDefaultValueContext) => void;
+    /**
      * Enter a parse tree produced by the `setColumnType`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
@@ -633,17 +730,17 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitSetColumnType?: (ctx: SetColumnTypeContext) => void;
     /**
-     * Enter a parse tree produced by the `setTableAuthorization`
+     * Enter a parse tree produced by the `dropNotNullConstraint`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
      */
-    enterSetTableAuthorization?: (ctx: SetTableAuthorizationContext) => void;
+    enterDropNotNullConstraint?: (ctx: DropNotNullConstraintContext) => void;
     /**
-     * Exit a parse tree produced by the `setTableAuthorization`
+     * Exit a parse tree produced by the `dropNotNullConstraint`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
      */
-    exitSetTableAuthorization?: (ctx: SetTableAuthorizationContext) => void;
+    exitDropNotNullConstraint?: (ctx: DropNotNullConstraintContext) => void;
     /**
      * Enter a parse tree produced by the `setTableProperties`
      * labeled alternative in `SqlBaseParser.statement`.
@@ -668,6 +765,18 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitTableExecute?: (ctx: TableExecuteContext) => void;
+    /**
+     * Enter a parse tree produced by the `setAuthorization`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterSetAuthorization?: (ctx: SetAuthorizationContext) => void;
+    /**
+     * Exit a parse tree produced by the `setAuthorization`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitSetAuthorization?: (ctx: SetAuthorizationContext) => void;
     /**
      * Enter a parse tree produced by the `analyze`
      * labeled alternative in `SqlBaseParser.statement`.
@@ -777,17 +886,17 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitRenameView?: (ctx: RenameViewContext) => void;
     /**
-     * Enter a parse tree produced by the `setViewAuthorization`
+     * Enter a parse tree produced by the `refreshView`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
      */
-    enterSetViewAuthorization?: (ctx: SetViewAuthorizationContext) => void;
+    enterRefreshView?: (ctx: RefreshViewContext) => void;
     /**
-     * Exit a parse tree produced by the `setViewAuthorization`
+     * Exit a parse tree produced by the `refreshView`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
      */
-    exitSetViewAuthorization?: (ctx: SetViewAuthorizationContext) => void;
+    exitRefreshView?: (ctx: RefreshViewContext) => void;
     /**
      * Enter a parse tree produced by the `call`
      * labeled alternative in `SqlBaseParser.statement`.
@@ -800,6 +909,78 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitCall?: (ctx: CallContext) => void;
+    /**
+     * Enter a parse tree produced by the `createFunction`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterCreateFunction?: (ctx: CreateFunctionContext) => void;
+    /**
+     * Exit a parse tree produced by the `createFunction`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitCreateFunction?: (ctx: CreateFunctionContext) => void;
+    /**
+     * Enter a parse tree produced by the `dropFunction`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterDropFunction?: (ctx: DropFunctionContext) => void;
+    /**
+     * Exit a parse tree produced by the `dropFunction`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitDropFunction?: (ctx: DropFunctionContext) => void;
+    /**
+     * Enter a parse tree produced by the `createBranch`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterCreateBranch?: (ctx: CreateBranchContext) => void;
+    /**
+     * Exit a parse tree produced by the `createBranch`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitCreateBranch?: (ctx: CreateBranchContext) => void;
+    /**
+     * Enter a parse tree produced by the `dropBranch`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterDropBranch?: (ctx: DropBranchContext) => void;
+    /**
+     * Exit a parse tree produced by the `dropBranch`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitDropBranch?: (ctx: DropBranchContext) => void;
+    /**
+     * Enter a parse tree produced by the `fastForwardBranch`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterFastForwardBranch?: (ctx: FastForwardBranchContext) => void;
+    /**
+     * Exit a parse tree produced by the `fastForwardBranch`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitFastForwardBranch?: (ctx: FastForwardBranchContext) => void;
+    /**
+     * Enter a parse tree produced by the `showBranches`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterShowBranches?: (ctx: ShowBranchesContext) => void;
+    /**
+     * Exit a parse tree produced by the `showBranches`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitShowBranches?: (ctx: ShowBranchesContext) => void;
     /**
      * Enter a parse tree produced by the `createRole`
      * labeled alternative in `SqlBaseParser.statement`.
@@ -837,6 +1018,18 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitGrantRoles?: (ctx: GrantRolesContext) => void;
     /**
+     * Enter a parse tree produced by the `grantPrivileges`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterGrantPrivileges?: (ctx: GrantPrivilegesContext) => void;
+    /**
+     * Exit a parse tree produced by the `grantPrivileges`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitGrantPrivileges?: (ctx: GrantPrivilegesContext) => void;
+    /**
      * Enter a parse tree produced by the `revokeRoles`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
@@ -849,29 +1042,17 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitRevokeRoles?: (ctx: RevokeRolesContext) => void;
     /**
-     * Enter a parse tree produced by the `setRole`
+     * Enter a parse tree produced by the `revokePrivileges`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
      */
-    enterSetRole?: (ctx: SetRoleContext) => void;
+    enterRevokePrivileges?: (ctx: RevokePrivilegesContext) => void;
     /**
-     * Exit a parse tree produced by the `setRole`
+     * Exit a parse tree produced by the `revokePrivileges`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
      */
-    exitSetRole?: (ctx: SetRoleContext) => void;
-    /**
-     * Enter a parse tree produced by the `grant`
-     * labeled alternative in `SqlBaseParser.statement`.
-     * @param ctx the parse tree
-     */
-    enterGrant?: (ctx: GrantContext) => void;
-    /**
-     * Exit a parse tree produced by the `grant`
-     * labeled alternative in `SqlBaseParser.statement`.
-     * @param ctx the parse tree
-     */
-    exitGrant?: (ctx: GrantContext) => void;
+    exitRevokePrivileges?: (ctx: RevokePrivilegesContext) => void;
     /**
      * Enter a parse tree produced by the `deny`
      * labeled alternative in `SqlBaseParser.statement`.
@@ -885,17 +1066,17 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitDeny?: (ctx: DenyContext) => void;
     /**
-     * Enter a parse tree produced by the `revoke`
+     * Enter a parse tree produced by the `setRole`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
      */
-    enterRevoke?: (ctx: RevokeContext) => void;
+    enterSetRole?: (ctx: SetRoleContext) => void;
     /**
-     * Exit a parse tree produced by the `revoke`
+     * Exit a parse tree produced by the `setRole`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
      */
-    exitRevoke?: (ctx: RevokeContext) => void;
+    exitSetRole?: (ctx: SetRoleContext) => void;
     /**
      * Enter a parse tree produced by the `showGrants`
      * labeled alternative in `SqlBaseParser.statement`.
@@ -980,6 +1161,18 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitShowCreateMaterializedView?: (ctx: ShowCreateMaterializedViewContext) => void;
+    /**
+     * Enter a parse tree produced by the `showCreateFunction`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterShowCreateFunction?: (ctx: ShowCreateFunctionContext) => void;
+    /**
+     * Exit a parse tree produced by the `showCreateFunction`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitShowCreateFunction?: (ctx: ShowCreateFunctionContext) => void;
     /**
      * Enter a parse tree produced by the `showTables`
      * labeled alternative in `SqlBaseParser.statement`.
@@ -1257,6 +1450,18 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitDescribeOutput?: (ctx: DescribeOutputContext) => void;
     /**
+     * Enter a parse tree produced by the `describeQueryOutput`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    enterDescribeQueryOutput?: (ctx: DescribeQueryOutputContext) => void;
+    /**
+     * Exit a parse tree produced by the `describeQueryOutput`
+     * labeled alternative in `SqlBaseParser.statement`.
+     * @param ctx the parse tree
+     */
+    exitDescribeQueryOutput?: (ctx: DescribeQueryOutputContext) => void;
+    /**
      * Enter a parse tree produced by the `setPath`
      * labeled alternative in `SqlBaseParser.statement`.
      * @param ctx the parse tree
@@ -1304,6 +1509,36 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitMerge?: (ctx: MergeContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.rootQuery`.
+     * @param ctx the parse tree
+     */
+    enterRootQuery?: (ctx: RootQueryContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.rootQuery`.
+     * @param ctx the parse tree
+     */
+    exitRootQuery?: (ctx: RootQueryContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.rootQueryWithSession`.
+     * @param ctx the parse tree
+     */
+    enterRootQueryWithSession?: (ctx: RootQueryWithSessionContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.rootQueryWithSession`.
+     * @param ctx the parse tree
+     */
+    exitRootQueryWithSession?: (ctx: RootQueryWithSessionContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.sessionProperty`.
+     * @param ctx the parse tree
+     */
+    enterSessionProperty?: (ctx: SessionPropertyContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.sessionProperty`.
+     * @param ctx the parse tree
+     */
+    exitSessionProperty?: (ctx: SessionPropertyContext) => void;
     /**
      * Enter a parse tree produced by `SqlBaseParser.query`.
      * @param ctx the parse tree
@@ -1419,6 +1654,16 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitQueryNoWith?: (ctx: QueryNoWithContext) => void;
     /**
+     * Enter a parse tree produced by `SqlBaseParser.orderBy`.
+     * @param ctx the parse tree
+     */
+    enterOrderBy?: (ctx: OrderByContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.orderBy`.
+     * @param ctx the parse tree
+     */
+    exitOrderBy?: (ctx: OrderByContext) => void;
+    /**
      * Enter a parse tree produced by `SqlBaseParser.limitRowCount`.
      * @param ctx the parse tree
      */
@@ -1511,6 +1756,16 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitSubquery?: (ctx: SubqueryContext) => void;
     /**
+     * Enter a parse tree produced by `SqlBaseParser.corresponding`.
+     * @param ctx the parse tree
+     */
+    enterCorresponding?: (ctx: CorrespondingContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.corresponding`.
+     * @param ctx the parse tree
+     */
+    exitCorresponding?: (ctx: CorrespondingContext) => void;
+    /**
      * Enter a parse tree produced by `SqlBaseParser.sortItem`.
      * @param ctx the parse tree
      */
@@ -1552,6 +1807,18 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSingleGroupingSet?: (ctx: SingleGroupingSetContext) => void;
+    /**
+     * Enter a parse tree produced by the `auto`
+     * labeled alternative in `SqlBaseParser.groupingElement`.
+     * @param ctx the parse tree
+     */
+    enterAuto?: (ctx: AutoContext) => void;
+    /**
+     * Exit a parse tree produced by the `auto`
+     * labeled alternative in `SqlBaseParser.groupingElement`.
+     * @param ctx the parse tree
+     */
+    exitAuto?: (ctx: AutoContext) => void;
     /**
      * Enter a parse tree produced by the `rollup`
      * labeled alternative in `SqlBaseParser.groupingElement`.
@@ -1716,6 +1983,46 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitSampledRelation?: (ctx: SampledRelationContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.pivot`.
+     * @param ctx the parse tree
+     */
+    enterPivot?: (ctx: PivotContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.pivot`.
+     * @param ctx the parse tree
+     */
+    exitPivot?: (ctx: PivotContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.pivotAggregation`.
+     * @param ctx the parse tree
+     */
+    enterPivotAggregation?: (ctx: PivotAggregationContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.pivotAggregation`.
+     * @param ctx the parse tree
+     */
+    exitPivotAggregation?: (ctx: PivotAggregationContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.pivotColumns`.
+     * @param ctx the parse tree
+     */
+    enterPivotColumns?: (ctx: PivotColumnsContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.pivotColumns`.
+     * @param ctx the parse tree
+     */
+    exitPivotColumns?: (ctx: PivotColumnsContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.pivotValueGroup`.
+     * @param ctx the parse tree
+     */
+    enterPivotValueGroup?: (ctx: PivotValueGroupContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.pivotValueGroup`.
+     * @param ctx the parse tree
+     */
+    exitPivotValueGroup?: (ctx: PivotValueGroupContext) => void;
     /**
      * Enter a parse tree produced by `SqlBaseParser.sampleType`.
      * @param ctx the parse tree
@@ -1930,6 +2237,18 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitJsonTable?: (ctx: JsonTableContext) => void;
+    /**
+     * Enter a parse tree produced by the `nearest`
+     * labeled alternative in `SqlBaseParser.relationPrimary`.
+     * @param ctx the parse tree
+     */
+    enterNearest?: (ctx: NearestContext) => void;
+    /**
+     * Exit a parse tree produced by the `nearest`
+     * labeled alternative in `SqlBaseParser.relationPrimary`.
+     * @param ctx the parse tree
+     */
+    exitNearest?: (ctx: NearestContext) => void;
     /**
      * Enter a parse tree produced by the `ordinalityColumn`
      * labeled alternative in `SqlBaseParser.jsonTableColumn`.
@@ -2283,6 +2602,18 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitNullPredicate?: (ctx: NullPredicateContext) => void;
     /**
+     * Enter a parse tree produced by the `booleanTest`
+     * labeled alternative in `SqlBaseParser.predicate`.
+     * @param ctx the parse tree
+     */
+    enterBooleanTest?: (ctx: BooleanTestContext) => void;
+    /**
+     * Exit a parse tree produced by the `booleanTest`
+     * labeled alternative in `SqlBaseParser.predicate`.
+     * @param ctx the parse tree
+     */
+    exitBooleanTest?: (ctx: BooleanTestContext) => void;
+    /**
      * Enter a parse tree produced by the `distinctFrom`
      * labeled alternative in `SqlBaseParser.predicate`.
      * @param ctx the parse tree
@@ -2294,6 +2625,30 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitDistinctFrom?: (ctx: DistinctFromContext) => void;
+    /**
+     * Enter a parse tree produced by the `match`
+     * labeled alternative in `SqlBaseParser.predicate`.
+     * @param ctx the parse tree
+     */
+    enterMatch?: (ctx: MatchContext) => void;
+    /**
+     * Exit a parse tree produced by the `match`
+     * labeled alternative in `SqlBaseParser.predicate`.
+     * @param ctx the parse tree
+     */
+    exitMatch?: (ctx: MatchContext) => void;
+    /**
+     * Enter a parse tree produced by the `overlaps`
+     * labeled alternative in `SqlBaseParser.predicate`.
+     * @param ctx the parse tree
+     */
+    enterOverlaps?: (ctx: OverlapsContext) => void;
+    /**
+     * Exit a parse tree produced by the `overlaps`
+     * labeled alternative in `SqlBaseParser.predicate`.
+     * @param ctx the parse tree
+     */
+    exitOverlaps?: (ctx: OverlapsContext) => void;
     /**
      * Enter a parse tree produced by the `valueExpressionDefault`
      * labeled alternative in `SqlBaseParser.valueExpression`.
@@ -2318,6 +2673,18 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitConcatenation?: (ctx: ConcatenationContext) => void;
+    /**
+     * Enter a parse tree produced by the `atLocal`
+     * labeled alternative in `SqlBaseParser.valueExpression`.
+     * @param ctx the parse tree
+     */
+    enterAtLocal?: (ctx: AtLocalContext) => void;
+    /**
+     * Exit a parse tree produced by the `atLocal`
+     * labeled alternative in `SqlBaseParser.valueExpression`.
+     * @param ctx the parse tree
+     */
+    exitAtLocal?: (ctx: AtLocalContext) => void;
     /**
      * Enter a parse tree produced by the `arithmeticBinary`
      * labeled alternative in `SqlBaseParser.valueExpression`.
@@ -2367,18 +2734,6 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitDereference?: (ctx: DereferenceContext) => void;
     /**
-     * Enter a parse tree produced by the `typeConstructor`
-     * labeled alternative in `SqlBaseParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    enterTypeConstructor?: (ctx: TypeConstructorContext) => void;
-    /**
-     * Exit a parse tree produced by the `typeConstructor`
-     * labeled alternative in `SqlBaseParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    exitTypeConstructor?: (ctx: TypeConstructorContext) => void;
-    /**
      * Enter a parse tree produced by the `jsonValue`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
      * @param ctx the parse tree
@@ -2391,17 +2746,41 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitJsonValue?: (ctx: JsonValueContext) => void;
     /**
-     * Enter a parse tree produced by the `specialDateTimeFunction`
+     * Enter a parse tree produced by the `literals`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
      * @param ctx the parse tree
      */
-    enterSpecialDateTimeFunction?: (ctx: SpecialDateTimeFunctionContext) => void;
+    enterLiterals?: (ctx: LiteralsContext) => void;
     /**
-     * Exit a parse tree produced by the `specialDateTimeFunction`
+     * Exit a parse tree produced by the `literals`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
      * @param ctx the parse tree
      */
-    exitSpecialDateTimeFunction?: (ctx: SpecialDateTimeFunctionContext) => void;
+    exitLiterals?: (ctx: LiteralsContext) => void;
+    /**
+     * Enter a parse tree produced by the `currentDate`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterCurrentDate?: (ctx: CurrentDateContext) => void;
+    /**
+     * Exit a parse tree produced by the `currentDate`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitCurrentDate?: (ctx: CurrentDateContext) => void;
+    /**
+     * Enter a parse tree produced by the `stringLiteralDereference`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterStringLiteralDereference?: (ctx: StringLiteralDereferenceContext) => void;
+    /**
+     * Exit a parse tree produced by the `stringLiteralDereference`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitStringLiteralDereference?: (ctx: StringLiteralDereferenceContext) => void;
     /**
      * Enter a parse tree produced by the `substring`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
@@ -2487,6 +2866,18 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitNormalize?: (ctx: NormalizeContext) => void;
     /**
+     * Enter a parse tree produced by the `localTimestamp`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterLocalTimestamp?: (ctx: LocalTimestampContext) => void;
+    /**
+     * Exit a parse tree produced by the `localTimestamp`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitLocalTimestamp?: (ctx: LocalTimestampContext) => void;
+    /**
      * Enter a parse tree produced by the `jsonObject`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
      * @param ctx the parse tree
@@ -2498,42 +2889,6 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitJsonObject?: (ctx: JsonObjectContext) => void;
-    /**
-     * Enter a parse tree produced by the `intervalLiteral`
-     * labeled alternative in `SqlBaseParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    enterIntervalLiteral?: (ctx: IntervalLiteralContext) => void;
-    /**
-     * Exit a parse tree produced by the `intervalLiteral`
-     * labeled alternative in `SqlBaseParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    exitIntervalLiteral?: (ctx: IntervalLiteralContext) => void;
-    /**
-     * Enter a parse tree produced by the `numericLiteral`
-     * labeled alternative in `SqlBaseParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    enterNumericLiteral?: (ctx: NumericLiteralContext) => void;
-    /**
-     * Exit a parse tree produced by the `numericLiteral`
-     * labeled alternative in `SqlBaseParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    exitNumericLiteral?: (ctx: NumericLiteralContext) => void;
-    /**
-     * Enter a parse tree produced by the `booleanLiteral`
-     * labeled alternative in `SqlBaseParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    enterBooleanLiteral?: (ctx: BooleanLiteralContext) => void;
-    /**
-     * Exit a parse tree produced by the `booleanLiteral`
-     * labeled alternative in `SqlBaseParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    exitBooleanLiteral?: (ctx: BooleanLiteralContext) => void;
     /**
      * Enter a parse tree produced by the `jsonArray`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
@@ -2571,18 +2926,6 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitColumnReference?: (ctx: ColumnReferenceContext) => void;
     /**
-     * Enter a parse tree produced by the `nullLiteral`
-     * labeled alternative in `SqlBaseParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    enterNullLiteral?: (ctx: NullLiteralContext) => void;
-    /**
-     * Exit a parse tree produced by the `nullLiteral`
-     * labeled alternative in `SqlBaseParser.primaryExpression`.
-     * @param ctx the parse tree
-     */
-    exitNullLiteral?: (ctx: NullLiteralContext) => void;
-    /**
      * Enter a parse tree produced by the `rowConstructor`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
      * @param ctx the parse tree
@@ -2594,6 +2937,18 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitRowConstructor?: (ctx: RowConstructorContext) => void;
+    /**
+     * Enter a parse tree produced by the `overlay`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterOverlay?: (ctx: OverlayContext) => void;
+    /**
+     * Exit a parse tree produced by the `overlay`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitOverlay?: (ctx: OverlayContext) => void;
     /**
      * Enter a parse tree produced by the `subscript`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
@@ -2643,17 +2998,29 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitSubqueryExpression?: (ctx: SubqueryExpressionContext) => void;
     /**
-     * Enter a parse tree produced by the `binaryLiteral`
+     * Enter a parse tree produced by the `currentTime`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
      * @param ctx the parse tree
      */
-    enterBinaryLiteral?: (ctx: BinaryLiteralContext) => void;
+    enterCurrentTime?: (ctx: CurrentTimeContext) => void;
     /**
-     * Exit a parse tree produced by the `binaryLiteral`
+     * Exit a parse tree produced by the `currentTime`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
      * @param ctx the parse tree
      */
-    exitBinaryLiteral?: (ctx: BinaryLiteralContext) => void;
+    exitCurrentTime?: (ctx: CurrentTimeContext) => void;
+    /**
+     * Enter a parse tree produced by the `localTime`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterLocalTime?: (ctx: LocalTimeContext) => void;
+    /**
+     * Exit a parse tree produced by the `localTime`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitLocalTime?: (ctx: LocalTimeContext) => void;
     /**
      * Enter a parse tree produced by the `currentUser`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
@@ -2703,17 +3070,17 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitExtract?: (ctx: ExtractContext) => void;
     /**
-     * Enter a parse tree produced by the `stringLiteral`
+     * Enter a parse tree produced by the `staticMethodCall`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
      * @param ctx the parse tree
      */
-    enterStringLiteral?: (ctx: StringLiteralContext) => void;
+    enterStaticMethodCall?: (ctx: StaticMethodCallContext) => void;
     /**
-     * Exit a parse tree produced by the `stringLiteral`
+     * Exit a parse tree produced by the `staticMethodCall`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
      * @param ctx the parse tree
      */
-    exitStringLiteral?: (ctx: StringLiteralContext) => void;
+    exitStaticMethodCall?: (ctx: StaticMethodCallContext) => void;
     /**
      * Enter a parse tree produced by the `arrayConstructor`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
@@ -2738,6 +3105,30 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitFunctionCall?: (ctx: FunctionCallContext) => void;
+    /**
+     * Enter a parse tree produced by the `unique`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterUnique?: (ctx: UniqueContext) => void;
+    /**
+     * Exit a parse tree produced by the `unique`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitUnique?: (ctx: UniqueContext) => void;
+    /**
+     * Enter a parse tree produced by the `currentTimestamp`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterCurrentTimestamp?: (ctx: CurrentTimestampContext) => void;
+    /**
+     * Exit a parse tree produced by the `currentTimestamp`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitCurrentTimestamp?: (ctx: CurrentTimestampContext) => void;
     /**
      * Enter a parse tree produced by the `currentSchema`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
@@ -2811,6 +3202,18 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitCurrentCatalog?: (ctx: CurrentCatalogContext) => void;
     /**
+     * Enter a parse tree produced by the `arrayWildcardSubscript`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterArrayWildcardSubscript?: (ctx: ArrayWildcardSubscriptContext) => void;
+    /**
+     * Exit a parse tree produced by the `arrayWildcardSubscript`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitArrayWildcardSubscript?: (ctx: ArrayWildcardSubscriptContext) => void;
+    /**
      * Enter a parse tree produced by the `groupingOperation`
      * labeled alternative in `SqlBaseParser.primaryExpression`.
      * @param ctx the parse tree
@@ -2822,6 +3225,112 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitGroupingOperation?: (ctx: GroupingOperationContext) => void;
+    /**
+     * Enter a parse tree produced by the `methodCall`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    enterMethodCall?: (ctx: MethodCallContext) => void;
+    /**
+     * Exit a parse tree produced by the `methodCall`
+     * labeled alternative in `SqlBaseParser.primaryExpression`.
+     * @param ctx the parse tree
+     */
+    exitMethodCall?: (ctx: MethodCallContext) => void;
+    /**
+     * Enter a parse tree produced by the `intervalLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    enterIntervalLiteral?: (ctx: IntervalLiteralContext) => void;
+    /**
+     * Exit a parse tree produced by the `intervalLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    exitIntervalLiteral?: (ctx: IntervalLiteralContext) => void;
+    /**
+     * Enter a parse tree produced by the `typeConstructor`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    enterTypeConstructor?: (ctx: TypeConstructorContext) => void;
+    /**
+     * Exit a parse tree produced by the `typeConstructor`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    exitTypeConstructor?: (ctx: TypeConstructorContext) => void;
+    /**
+     * Enter a parse tree produced by the `numericLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    enterNumericLiteral?: (ctx: NumericLiteralContext) => void;
+    /**
+     * Exit a parse tree produced by the `numericLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    exitNumericLiteral?: (ctx: NumericLiteralContext) => void;
+    /**
+     * Enter a parse tree produced by the `booleanLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    enterBooleanLiteral?: (ctx: BooleanLiteralContext) => void;
+    /**
+     * Exit a parse tree produced by the `booleanLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    exitBooleanLiteral?: (ctx: BooleanLiteralContext) => void;
+    /**
+     * Enter a parse tree produced by the `stringLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    enterStringLiteral?: (ctx: StringLiteralContext) => void;
+    /**
+     * Exit a parse tree produced by the `stringLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    exitStringLiteral?: (ctx: StringLiteralContext) => void;
+    /**
+     * Enter a parse tree produced by the `binaryLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    enterBinaryLiteral?: (ctx: BinaryLiteralContext) => void;
+    /**
+     * Exit a parse tree produced by the `binaryLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    exitBinaryLiteral?: (ctx: BinaryLiteralContext) => void;
+    /**
+     * Enter a parse tree produced by the `nullLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    enterNullLiteral?: (ctx: NullLiteralContext) => void;
+    /**
+     * Exit a parse tree produced by the `nullLiteral`
+     * labeled alternative in `SqlBaseParser.literal`.
+     * @param ctx the parse tree
+     */
+    exitNullLiteral?: (ctx: NullLiteralContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.fieldConstructor`.
+     * @param ctx the parse tree
+     */
+    enterFieldConstructor?: (ctx: FieldConstructorContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.fieldConstructor`.
+     * @param ctx the parse tree
+     */
+    exitFieldConstructor?: (ctx: FieldConstructorContext) => void;
     /**
      * Enter a parse tree produced by `SqlBaseParser.jsonPathInvocation`.
      * @param ctx the parse tree
@@ -3021,16 +3530,6 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitInterval?: (ctx: IntervalContext) => void;
     /**
-     * Enter a parse tree produced by `SqlBaseParser.intervalField`.
-     * @param ctx the parse tree
-     */
-    enterIntervalField?: (ctx: IntervalFieldContext) => void;
-    /**
-     * Exit a parse tree produced by `SqlBaseParser.intervalField`.
-     * @param ctx the parse tree
-     */
-    exitIntervalField?: (ctx: IntervalFieldContext) => void;
-    /**
      * Enter a parse tree produced by `SqlBaseParser.normalForm`.
      * @param ctx the parse tree
      */
@@ -3137,6 +3636,66 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitLegacyMapType?: (ctx: LegacyMapTypeContext) => void;
     /**
+     * Enter a parse tree produced by the `compositeYearToMonthInterval`
+     * labeled alternative in `SqlBaseParser.intervalQualifier`.
+     * @param ctx the parse tree
+     */
+    enterCompositeYearToMonthInterval?: (ctx: CompositeYearToMonthIntervalContext) => void;
+    /**
+     * Exit a parse tree produced by the `compositeYearToMonthInterval`
+     * labeled alternative in `SqlBaseParser.intervalQualifier`.
+     * @param ctx the parse tree
+     */
+    exitCompositeYearToMonthInterval?: (ctx: CompositeYearToMonthIntervalContext) => void;
+    /**
+     * Enter a parse tree produced by the `simpleYearMonthInterval`
+     * labeled alternative in `SqlBaseParser.intervalQualifier`.
+     * @param ctx the parse tree
+     */
+    enterSimpleYearMonthInterval?: (ctx: SimpleYearMonthIntervalContext) => void;
+    /**
+     * Exit a parse tree produced by the `simpleYearMonthInterval`
+     * labeled alternative in `SqlBaseParser.intervalQualifier`.
+     * @param ctx the parse tree
+     */
+    exitSimpleYearMonthInterval?: (ctx: SimpleYearMonthIntervalContext) => void;
+    /**
+     * Enter a parse tree produced by the `compositeDayTimeInterval`
+     * labeled alternative in `SqlBaseParser.intervalQualifier`.
+     * @param ctx the parse tree
+     */
+    enterCompositeDayTimeInterval?: (ctx: CompositeDayTimeIntervalContext) => void;
+    /**
+     * Exit a parse tree produced by the `compositeDayTimeInterval`
+     * labeled alternative in `SqlBaseParser.intervalQualifier`.
+     * @param ctx the parse tree
+     */
+    exitCompositeDayTimeInterval?: (ctx: CompositeDayTimeIntervalContext) => void;
+    /**
+     * Enter a parse tree produced by the `simpleDayTimeInterval`
+     * labeled alternative in `SqlBaseParser.intervalQualifier`.
+     * @param ctx the parse tree
+     */
+    enterSimpleDayTimeInterval?: (ctx: SimpleDayTimeIntervalContext) => void;
+    /**
+     * Exit a parse tree produced by the `simpleDayTimeInterval`
+     * labeled alternative in `SqlBaseParser.intervalQualifier`.
+     * @param ctx the parse tree
+     */
+    exitSimpleDayTimeInterval?: (ctx: SimpleDayTimeIntervalContext) => void;
+    /**
+     * Enter a parse tree produced by the `secondsDayTimeInterval`
+     * labeled alternative in `SqlBaseParser.intervalQualifier`.
+     * @param ctx the parse tree
+     */
+    enterSecondsDayTimeInterval?: (ctx: SecondsDayTimeIntervalContext) => void;
+    /**
+     * Exit a parse tree produced by the `secondsDayTimeInterval`
+     * labeled alternative in `SqlBaseParser.intervalQualifier`.
+     * @param ctx the parse tree
+     */
+    exitSecondsDayTimeInterval?: (ctx: SecondsDayTimeIntervalContext) => void;
+    /**
      * Enter a parse tree produced by `SqlBaseParser.rowField`.
      * @param ctx the parse tree
      */
@@ -3157,15 +3716,25 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitTypeParameter?: (ctx: TypeParameterContext) => void;
     /**
-     * Enter a parse tree produced by `SqlBaseParser.whenClause`.
+     * Enter a parse tree produced by `SqlBaseParser.simpleWhenClause`.
      * @param ctx the parse tree
      */
-    enterWhenClause?: (ctx: WhenClauseContext) => void;
+    enterSimpleWhenClause?: (ctx: SimpleWhenClauseContext) => void;
     /**
-     * Exit a parse tree produced by `SqlBaseParser.whenClause`.
+     * Exit a parse tree produced by `SqlBaseParser.simpleWhenClause`.
      * @param ctx the parse tree
      */
-    exitWhenClause?: (ctx: WhenClauseContext) => void;
+    exitSimpleWhenClause?: (ctx: SimpleWhenClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.searchedWhenClause`.
+     * @param ctx the parse tree
+     */
+    enterSearchedWhenClause?: (ctx: SearchedWhenClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.searchedWhenClause`.
+     * @param ctx the parse tree
+     */
+    exitSearchedWhenClause?: (ctx: SearchedWhenClauseContext) => void;
     /**
      * Enter a parse tree produced by `SqlBaseParser.filter`.
      * @param ctx the parse tree
@@ -3554,25 +4123,25 @@ export class SqlBaseListener implements ParseTreeListener {
     exitSerializable?: (ctx: SerializableContext) => void;
     /**
      * Enter a parse tree produced by the `positionalArgument`
-     * labeled alternative in `SqlBaseParser.callArgument`.
+     * labeled alternative in `SqlBaseParser.argument`.
      * @param ctx the parse tree
      */
     enterPositionalArgument?: (ctx: PositionalArgumentContext) => void;
     /**
      * Exit a parse tree produced by the `positionalArgument`
-     * labeled alternative in `SqlBaseParser.callArgument`.
+     * labeled alternative in `SqlBaseParser.argument`.
      * @param ctx the parse tree
      */
     exitPositionalArgument?: (ctx: PositionalArgumentContext) => void;
     /**
      * Enter a parse tree produced by the `namedArgument`
-     * labeled alternative in `SqlBaseParser.callArgument`.
+     * labeled alternative in `SqlBaseParser.argument`.
      * @param ctx the parse tree
      */
     enterNamedArgument?: (ctx: NamedArgumentContext) => void;
     /**
      * Exit a parse tree produced by the `namedArgument`
-     * labeled alternative in `SqlBaseParser.callArgument`.
+     * labeled alternative in `SqlBaseParser.argument`.
      * @param ctx the parse tree
      */
     exitNamedArgument?: (ctx: NamedArgumentContext) => void;
@@ -3611,6 +4180,322 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitPathSpecification?: (ctx: PathSpecificationContext) => void;
     /**
+     * Enter a parse tree produced by `SqlBaseParser.functionSpecification`.
+     * @param ctx the parse tree
+     */
+    enterFunctionSpecification?: (ctx: FunctionSpecificationContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.functionSpecification`.
+     * @param ctx the parse tree
+     */
+    exitFunctionSpecification?: (ctx: FunctionSpecificationContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.functionDefinition`.
+     * @param ctx the parse tree
+     */
+    enterFunctionDefinition?: (ctx: FunctionDefinitionContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.functionDefinition`.
+     * @param ctx the parse tree
+     */
+    exitFunctionDefinition?: (ctx: FunctionDefinitionContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.functionDeclaration`.
+     * @param ctx the parse tree
+     */
+    enterFunctionDeclaration?: (ctx: FunctionDeclarationContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.functionDeclaration`.
+     * @param ctx the parse tree
+     */
+    exitFunctionDeclaration?: (ctx: FunctionDeclarationContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.parameterDeclaration`.
+     * @param ctx the parse tree
+     */
+    enterParameterDeclaration?: (ctx: ParameterDeclarationContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.parameterDeclaration`.
+     * @param ctx the parse tree
+     */
+    exitParameterDeclaration?: (ctx: ParameterDeclarationContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.returnsClause`.
+     * @param ctx the parse tree
+     */
+    enterReturnsClause?: (ctx: ReturnsClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.returnsClause`.
+     * @param ctx the parse tree
+     */
+    exitReturnsClause?: (ctx: ReturnsClauseContext) => void;
+    /**
+     * Enter a parse tree produced by the `languageCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    enterLanguageCharacteristic?: (ctx: LanguageCharacteristicContext) => void;
+    /**
+     * Exit a parse tree produced by the `languageCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    exitLanguageCharacteristic?: (ctx: LanguageCharacteristicContext) => void;
+    /**
+     * Enter a parse tree produced by the `deterministicCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    enterDeterministicCharacteristic?: (ctx: DeterministicCharacteristicContext) => void;
+    /**
+     * Exit a parse tree produced by the `deterministicCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    exitDeterministicCharacteristic?: (ctx: DeterministicCharacteristicContext) => void;
+    /**
+     * Enter a parse tree produced by the `returnsNullOnNullInputCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    enterReturnsNullOnNullInputCharacteristic?: (ctx: ReturnsNullOnNullInputCharacteristicContext) => void;
+    /**
+     * Exit a parse tree produced by the `returnsNullOnNullInputCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    exitReturnsNullOnNullInputCharacteristic?: (ctx: ReturnsNullOnNullInputCharacteristicContext) => void;
+    /**
+     * Enter a parse tree produced by the `calledOnNullInputCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    enterCalledOnNullInputCharacteristic?: (ctx: CalledOnNullInputCharacteristicContext) => void;
+    /**
+     * Exit a parse tree produced by the `calledOnNullInputCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    exitCalledOnNullInputCharacteristic?: (ctx: CalledOnNullInputCharacteristicContext) => void;
+    /**
+     * Enter a parse tree produced by the `securityCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    enterSecurityCharacteristic?: (ctx: SecurityCharacteristicContext) => void;
+    /**
+     * Exit a parse tree produced by the `securityCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    exitSecurityCharacteristic?: (ctx: SecurityCharacteristicContext) => void;
+    /**
+     * Enter a parse tree produced by the `commentCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    enterCommentCharacteristic?: (ctx: CommentCharacteristicContext) => void;
+    /**
+     * Exit a parse tree produced by the `commentCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    exitCommentCharacteristic?: (ctx: CommentCharacteristicContext) => void;
+    /**
+     * Enter a parse tree produced by the `propertiesCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    enterPropertiesCharacteristic?: (ctx: PropertiesCharacteristicContext) => void;
+    /**
+     * Exit a parse tree produced by the `propertiesCharacteristic`
+     * labeled alternative in `SqlBaseParser.routineCharacteristic`.
+     * @param ctx the parse tree
+     */
+    exitPropertiesCharacteristic?: (ctx: PropertiesCharacteristicContext) => void;
+    /**
+     * Enter a parse tree produced by the `returnStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterReturnStatement?: (ctx: ReturnStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `returnStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitReturnStatement?: (ctx: ReturnStatementContext) => void;
+    /**
+     * Enter a parse tree produced by the `assignmentStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterAssignmentStatement?: (ctx: AssignmentStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `assignmentStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitAssignmentStatement?: (ctx: AssignmentStatementContext) => void;
+    /**
+     * Enter a parse tree produced by the `simpleCaseStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterSimpleCaseStatement?: (ctx: SimpleCaseStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `simpleCaseStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitSimpleCaseStatement?: (ctx: SimpleCaseStatementContext) => void;
+    /**
+     * Enter a parse tree produced by the `searchedCaseStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterSearchedCaseStatement?: (ctx: SearchedCaseStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `searchedCaseStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitSearchedCaseStatement?: (ctx: SearchedCaseStatementContext) => void;
+    /**
+     * Enter a parse tree produced by the `ifStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterIfStatement?: (ctx: IfStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `ifStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitIfStatement?: (ctx: IfStatementContext) => void;
+    /**
+     * Enter a parse tree produced by the `iterateStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterIterateStatement?: (ctx: IterateStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `iterateStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitIterateStatement?: (ctx: IterateStatementContext) => void;
+    /**
+     * Enter a parse tree produced by the `leaveStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterLeaveStatement?: (ctx: LeaveStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `leaveStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitLeaveStatement?: (ctx: LeaveStatementContext) => void;
+    /**
+     * Enter a parse tree produced by the `compoundStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterCompoundStatement?: (ctx: CompoundStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `compoundStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitCompoundStatement?: (ctx: CompoundStatementContext) => void;
+    /**
+     * Enter a parse tree produced by the `loopStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterLoopStatement?: (ctx: LoopStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `loopStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitLoopStatement?: (ctx: LoopStatementContext) => void;
+    /**
+     * Enter a parse tree produced by the `whileStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterWhileStatement?: (ctx: WhileStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `whileStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitWhileStatement?: (ctx: WhileStatementContext) => void;
+    /**
+     * Enter a parse tree produced by the `repeatStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    enterRepeatStatement?: (ctx: RepeatStatementContext) => void;
+    /**
+     * Exit a parse tree produced by the `repeatStatement`
+     * labeled alternative in `SqlBaseParser.controlStatement`.
+     * @param ctx the parse tree
+     */
+    exitRepeatStatement?: (ctx: RepeatStatementContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.caseStatementWhenClause`.
+     * @param ctx the parse tree
+     */
+    enterCaseStatementWhenClause?: (ctx: CaseStatementWhenClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.caseStatementWhenClause`.
+     * @param ctx the parse tree
+     */
+    exitCaseStatementWhenClause?: (ctx: CaseStatementWhenClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.elseIfClause`.
+     * @param ctx the parse tree
+     */
+    enterElseIfClause?: (ctx: ElseIfClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.elseIfClause`.
+     * @param ctx the parse tree
+     */
+    exitElseIfClause?: (ctx: ElseIfClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.elseClause`.
+     * @param ctx the parse tree
+     */
+    enterElseClause?: (ctx: ElseClauseContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.elseClause`.
+     * @param ctx the parse tree
+     */
+    exitElseClause?: (ctx: ElseClauseContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.variableDeclaration`.
+     * @param ctx the parse tree
+     */
+    enterVariableDeclaration?: (ctx: VariableDeclarationContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.variableDeclaration`.
+     * @param ctx the parse tree
+     */
+    exitVariableDeclaration?: (ctx: VariableDeclarationContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.sqlStatementList`.
+     * @param ctx the parse tree
+     */
+    enterSqlStatementList?: (ctx: SqlStatementListContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.sqlStatementList`.
+     * @param ctx the parse tree
+     */
+    exitSqlStatementList?: (ctx: SqlStatementListContext) => void;
+    /**
      * Enter a parse tree produced by `SqlBaseParser.privilege`.
      * @param ctx the parse tree
      */
@@ -3620,6 +4505,36 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitPrivilege?: (ctx: PrivilegeContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.entityKind`.
+     * @param ctx the parse tree
+     */
+    enterEntityKind?: (ctx: EntityKindContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.entityKind`.
+     * @param ctx the parse tree
+     */
+    exitEntityKind?: (ctx: EntityKindContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.grantObject`.
+     * @param ctx the parse tree
+     */
+    enterGrantObject?: (ctx: GrantObjectContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.grantObject`.
+     * @param ctx the parse tree
+     */
+    exitGrantObject?: (ctx: GrantObjectContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.ownedEntityKind`.
+     * @param ctx the parse tree
+     */
+    enterOwnedEntityKind?: (ctx: OwnedEntityKindContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.ownedEntityKind`.
+     * @param ctx the parse tree
+     */
+    exitOwnedEntityKind?: (ctx: OwnedEntityKindContext) => void;
     /**
      * Enter a parse tree produced by `SqlBaseParser.qualifiedName`.
      * @param ctx the parse tree
@@ -3723,15 +4638,15 @@ export class SqlBaseListener implements ParseTreeListener {
      */
     exitRolePrincipal?: (ctx: RolePrincipalContext) => void;
     /**
-     * Enter a parse tree produced by `SqlBaseParser.roles`.
+     * Enter a parse tree produced by `SqlBaseParser.privilegeOrRole`.
      * @param ctx the parse tree
      */
-    enterRoles?: (ctx: RolesContext) => void;
+    enterPrivilegeOrRole?: (ctx: PrivilegeOrRoleContext) => void;
     /**
-     * Exit a parse tree produced by `SqlBaseParser.roles`.
+     * Exit a parse tree produced by `SqlBaseParser.privilegeOrRole`.
      * @param ctx the parse tree
      */
-    exitRoles?: (ctx: RolesContext) => void;
+    exitPrivilegeOrRole?: (ctx: PrivilegeOrRoleContext) => void;
     /**
      * Enter a parse tree produced by the `unquotedIdentifier`
      * labeled alternative in `SqlBaseParser.identifier`.
@@ -3780,6 +4695,16 @@ export class SqlBaseListener implements ParseTreeListener {
      * @param ctx the parse tree
      */
     exitDigitIdentifier?: (ctx: DigitIdentifierContext) => void;
+    /**
+     * Enter a parse tree produced by `SqlBaseParser.methodName`.
+     * @param ctx the parse tree
+     */
+    enterMethodName?: (ctx: MethodNameContext) => void;
+    /**
+     * Exit a parse tree produced by `SqlBaseParser.methodName`.
+     * @param ctx the parse tree
+     */
+    exitMethodName?: (ctx: MethodNameContext) => void;
     /**
      * Enter a parse tree produced by the `decimalLiteral`
      * labeled alternative in `SqlBaseParser.number`.

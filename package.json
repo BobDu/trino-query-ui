@@ -47,7 +47,7 @@
     "check:clean": "npm clean-install && npm run lint && npm run prettier:check",
     "preview": "vite preview",
     "sync:check": "node scripts/check-webui-sync.mjs",
-    "antlr4ng": "antlr4ng -visitor -listener -Dlanguage=TypeScript -o src/generated/lexer/SqlBase.g4 trino/SqlBase.g4"
+    "antlr4ng": "antlr4ng -visitor -listener -Dlanguage=TypeScript -Xexact-output-dir -o src/generated/lexer/SqlBase.g4 trino/SqlBase.g4"
   },
   "dependencies": {
     "antlr4-c3": "3.4.4",
